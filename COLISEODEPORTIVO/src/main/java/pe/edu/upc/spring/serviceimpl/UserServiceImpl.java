@@ -1,5 +1,56 @@
 package pe.edu.upc.spring.serviceimpl;
 
-public class UserServiceImpl {
+import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import pe.edu.upc.spring.model.User;
+import pe.edu.upc.spring.service.IUserService;
+import pe.edu.upc.spring.repository.IUserRepository;
+
+@Service
+public class UserServiceImpl implements IUserService {
+	
+	@Autowired
+	private IUserRepository dUser;
+
+	@Override
+	@Transactional
+	public boolean insertar(User user) {
+		User objUser = dUser.save(user) ;
+		if(objUser != null)
+			return true;
+		else
+			return false;
+	}
+
+	@Override
+	@Transactional
+	public boolean modificar(User user) {
+		return true;
+	}
+
+	@Override
+	@Transactional
+	public void eliminar(int userId) {
+		dUser.deleteById(userId);
+		
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<User> listarId(int userId) {
+		return dUser.findById(userId);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<User> listar() {
+		return dUser.findAll();
+	}
+	
+	
 }
