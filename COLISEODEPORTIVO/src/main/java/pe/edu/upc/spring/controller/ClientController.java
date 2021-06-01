@@ -15,83 +15,101 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
-import pe.edu.upc.spring.model.Role;
-import pe.edu.upc.spring.service.IRoleService;
+import pe.edu.upc.spring.model.User;
+import pe.edu.upc.spring.model.Client;
+
+import pe.edu.upc.spring.service.IUserService;
+import pe.edu.upc.spring.service.IClientService;
 
 @Controller
-@RequestMapping("/role")
-public class RoleController {
+@RequestMapping("/client")
+public class ClientController {
 	
 	@Autowired
-	private IRoleService rService;
+	private IClientService cService;
+	
+	@Autowired
+	private IUserService uService;
 	
 	@RequestMapping("/home")
-	public String irRoleBienvenido() {
+	public String irClientBienvenido() {
 		return "home";
 	}
 	
 	@RequestMapping("/")
-	public String irPaginaListadoRoles(Map<String, Object> model) {
-		model.put("listaRoles", rService.listar());
-		return "listRole";
+	public String irPaginaListadoClients(Map<String, Object> model) {
+		model.put("listaClients", cService.listar());
+		return "listClient";
 	}
 	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
-		model.addAttribute("role", new Role());
-		return "role";
+		
+		model.addAttribute("listaUsers", uService.listar());
+		
+		model.addAttribute("client", new Client());
+		model.addAttribute("user", new User());
+		
+		return "client";
 	}
 	
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute Role objRole, BindingResult binRes, Model model) throws ParseException {
-		if (binRes.hasErrors())
-			return "role";
+	public String registrar(@ModelAttribute Client objClient, BindingResult binRes, Model model) throws ParseException { 
+		
+		if (binRes.hasErrors()) {
+			model.addAttribute("listaUsers", uService.listar());
+			return "client";
+		}
 		else {
-			boolean flag = rService.insertar(objRole);
+			boolean flag = cService.insertar(objClient);
 			if (flag)
-				return "redirect:/role/listar";
+				return "redirect:/client/listar";
 			else {
 				model.addAttribute("mensaje", "Ocurrio un error");
-				return "redirect:/role/irRegistrar";
+				return "redirect:/client/irRegistrar";
 			}
 		}
 	}
 	
 	@RequestMapping("/modificar/{id}")
 	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir) throws ParseException {
-		Optional<Role> objRole = rService.listarId(id);
-		if(objRole == null) {
+		
+		Optional<Client> objClient = cService.listarId(id);
+		
+		if(objClient == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
-			return "redirect:/role/listar";
+			return "redirect:/client/listar";
 		}
 		else {
-			model.addAttribute("role", objRole);
-			return "role";
+			model.addAttribute("listaUsers", uService.listar());
+			
+			if(objClient.isPresent())
+				objClient.ifPresent(o -> model.addAttribute("client", o));
+			
+			return "client";
 		}
 	}
-	
-	
 	
 	@RequestMapping("/eliminar")
 	public String eliminar(Map<String, Object> model, @RequestParam(value="id") Integer id) {
 		try {
 			if (id != null && id>0) {
-				rService.eliminar(id);
-				model.put("listaRoles", rService.listar());
+				cService.eliminar(id);
+				model.put("listaClients", cService.listar());
 			}
 		}
 		catch (Exception ex) {
 			System.out.println(ex.getMessage());
 			model.put("mensaje", "Ocurrio un error");
-			model.put("listaRoles", rService.listar());
+			model.put("listaClients", cService.listar());
 		}
-		return "listRole";
+		return "listClient";
 	}
 	
 	@RequestMapping("/listar")
 	public String listar(Map<String, Object> model) {
-		model.put("listaRoles", rService.listar());
-		return "listRole";
+		model.put("listaClients", cService.listar());
+		return "listClient";
 	}
 	
 }
