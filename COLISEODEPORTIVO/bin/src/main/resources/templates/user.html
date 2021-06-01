@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <title>El Coliseo Deportivo</title>
+        <link rel="icon" type="image/png" th:href="@{/img/icon.png}">
+        <link rel="stylesheet" th:href="@{/css/main.css}">
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    </head>
+	<body>
+		<div th:replace="fragments/header :: header"></div>
+	
+		<div class="container mt-5">
+			<h2 style="color:white;">Usuarios</h2>
+		</div>
+		<!-- FORMULARIO REGSITRAR-->
+        <div class="container mt-5" id="formulario" >
+
+        <form class="row g-3 "  th:action="@{/user/registrar}" method="post" th:object="${user}">
+        	
+        	<!--DATOS-->
+        	
+        	<div class="col-md-1">
+                <label for="userid" class="form-label">ID:</label>
+                <input type="text" class="form-control" th:field="*{userId}">
+            </div>
+            
+            <div class="col-md-2">
+              <label for="role" class="form-label">Rol:</label>
+              <select class="form-select"  th:field="*{role.roleId}">
+                <option th:each="r:${listaRoles}" 
+                		th:value="${r.roleId}" 
+                		th:text="${r.roleDescription}"
+                		th:selected="(${r.roleId} == *{role.roleId})">
+                </option>
+              </select>
+            </div>
+        	
+            <div class="col-md-3 form-group">
+              	<label for="name" class="form-label">Nombre:</label>
+              	<input type="text" class="form-control" id="name" value="" required th:field="*{userNames}">
+              	<small class="form-text text-danger" th:if="${#fields.hasErrors('userNames')}" th:errors="*{userNames}"></small>
+            	<div class="valid-feedback">
+                	Correcto!
+            	</div>
+            </div>
+            
+            <div class="col-md-3 form-group">
+              	<label for="firstLastName" class="form-label">Apellido Paterno:</label>
+              	<input type="text" class="form-control" id="firstLastName" value="" required th:field="*{userFirstName}">
+              	<small class="form-text text-danger" th:if="${#fields.hasErrors('userFirstName')}" th:errors="*{userFirstName}"></small>
+            	<div class="valid-feedback">
+                	Correcto!
+            	</div>
+            </div>
+            
+            <div class="col-md-3 form-group">
+              	<label for="secondLastName" class="form-label">Apellido Materno:</label>
+              	<input type="text" class="form-control" id="secondLastName" value="" required th:field="*{userLastName}">
+              	<small class="form-text text-danger" th:if="${#fields.hasErrors('userLastName')}" th:errors="*{userLastName}"></small>
+            	<div class="valid-feedback">
+                	Correcto!
+            	</div>
+            </div>
+              
+            <div class="col-md-6 form-group">
+              	<label for="email" class="form-label">Email:</label>
+              	<input type="text" class="form-control" id="email" value="" required th:field="*{userEmail}">
+              	<small class="form-text text-danger" th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}"></small>
+            	<div class="valid-feedback">
+                	Correcto!
+            	</div>
+            </div>
+            
+            <div class="col-md-6 form-group">
+              	<label for="password" class="form-label">Password:</label>
+              	<input type="password" class="form-control" id="password" value="" required th:field="*{userPassword}">
+              	<small class="form-text text-danger" th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}"></small>
+            	<div class="valid-feedback">
+                	Correcto!
+            	</div>
+            </div>
+              
+            <!--SUBMIT-->
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Aceptar</button>
+				<a href="/user/listar" class="btn btn-danger">Cancelar</a>
+            </div>
+        
+        </form>
+
+      	</div>
+      	
+      	
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+       
+	</body>
+	
+</html>
