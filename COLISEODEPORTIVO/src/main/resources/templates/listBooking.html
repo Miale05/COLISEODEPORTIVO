@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <title>El Coliseo Deportivo</title>
+        <link rel="icon" type="image/png" th:href="@{/img/icon.png}">
+        <link rel="stylesheet" th:href="@{/css/main.css}">
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    </head>
+	<body>
+		<div th:replace="fragments/header :: header"></div>
+	
+		<div class="container mt-5">
+			<h2 style="color:white;">Reservas</h2>
+		</div>
+		      	
+      	<!--TABLA-->
+      	<div class="container mt-5" id="tabla">
+      	<form id="myform">
+      	<a 	style="border-bottom-color: black" th:href="@{/booking/irRegistrar}" id="add-row"
+			type = "button"
+			class= "btn btn-primary btn-md p-2">
+			Agregar Reserva
+		</a>
+						
+      	<table class="table" id="tabla">
+        	<thead>
+          	<tr>
+            	<th scope="col">ID</th>
+            	<th scope="col">Usuario</th>
+            	<th scope="col">Cancha</th>
+            	<th scope="col">Centro Deportivo</th>
+            	<th scope="col">Hora Inicio</th>
+            	<th scope="col">Hora Fin</th>
+            	<th scope="col">Precio</th>
+            	<th scope="col">Estado</th>
+            	<th scope="col">Fecha</th>
+            	<th scope="col" class="text-end">Operaciones</th>
+            	<th scope="col"></th>
+          	</tr>
+        	</thead>
+        	<tbody>
+          	<tr th:each="booking : ${listaBookings}">
+          		<td th:text="${booking.bookingId}"></td>
+          		<td th:text="${booking.client.user.userEmail}"></td>
+            	<td th:text="${booking.fieldschedule.sportfield.sportfieldName}"></td>
+            	<td th:text="${booking.fieldschedule.sportfield.sportcenter.sportcenterName}"></td>
+            	<td th:text="${booking.fieldschedule.schedule.scheduleStart}"></td>
+            	<td th:text="${booking.fieldschedule.schedule.scheduleEnd}"></td>
+            	<td th:text="${booking.fieldschedule.fieldschedulePrice}"></td>
+            	<td th:text="${booking.bookingstatus.bookingstatusName}"></td>
+            	<td th:text="${booking.bookingDate}"></td>
+            	<td class="text-center"><a type="button" class= "btn btn-danger btn-md" th:href="@{/booking/eliminar?id=}+${booking.bookingId}"> <img class="me-3" th:src="@{/img/delete.png}" alt="">ELIMINAR</a></td>
+				<td class="text-start"><a type="button" class= "btn btn-warning btn-md" th:href="@{'/booking/modificar/' + ${booking.bookingId}}"> <img class="me-3" th:src="@{/img/edit.png}" alt="">MODIFICAR</a></td>
+          	</tr>
+        	</tbody>
+      	</table>
+      	<div th:if="${mensaje}" class="alert alert-danger">
+			<p th:text="${mensaje}"></p>
+		</div>
+      	</form>
+      	</div>
+      	
+      	
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+       
+	</body>
+	
+</html>

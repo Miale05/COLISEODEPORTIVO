@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <title>El Coliseo Deportivo</title>
+        <link rel="icon" type="image/png" th:href="@{/img/icon.png}">
+        <link rel="stylesheet" th:href="@{/css/main.css}">
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    </head>
+	<body>
+		<div th:replace="fragments/header :: header"></div>
+	
+		<div class="container mt-5">
+			<h2 style="color:white;">Reservas</h2>
+		</div>
+		<!-- FORMULARIO REGSITRAR-->
+        <div class="container mt-5" id="formulario" >
+
+        <form class="row g-3 "  th:action="@{/booking/registrar}" method="post" th:object="${booking}">
+        	
+        	<!--DATOS-->
+        	
+        	<div class="col-md-1">
+                <label for="bookingid" class="form-label">ID:</label>
+                <input type="text" class="form-control" th:field="*{bookingId}">
+            </div>
+            
+            <div class="col-md-3">
+              <label for="user" class="form-label">Usuario:</label>
+              <select class="form-select"  th:field="*{client.user.userId}">
+                <option th:each="c:${listaUsers}" 
+                		th:value="${c.user.userId}" 
+                		th:text="${c.user.userEmail}"
+                		th:selected="(${c.user.userId} == *{client.user.userId})">
+                </option>
+              </select>
+            </div>
+        	
+        	<div class="col-md-6">
+              <label for="fieldschedule" class="form-label">Cancha:</label>
+              <select class="form-select"  th:field="*{fieldschedule.fieldscheduleId}">
+                <option th:each="fs:${listaFielSchedules}" 
+                		th:value="${fs.fieldscheduleId}" 
+                		th:text="${fs.sportfield.sportfieldName + ' ' + fs.sportfield.sportcenter.sportcenterName
+                				+ ' ' + fs.schedule.scheduleStart + '-' + fs.schedule.scheduleEnd + ' ' + fs.fieldschedulePrice}"
+                		th:selected="(${fs.fieldscheduleId} == *{fieldschedule.fieldscheduleId})">
+                </option>
+              </select>
+            </div>
+        	
+            <div class="col-md-3">
+              <label for="status" class="form-label">Estado:</label>
+              <select class="form-select"  th:field="*{bookingstatus.bookingstatusId}">
+                <option th:each="bs:${listaBookingStatus}" 
+                		th:value="${bs.bookingstatusId}" 
+                		th:text="${bs.bookingstatusName}"
+                		th:selected="(${bs.bookingstatusId} == *{bookingstatus.bookingstatusId})">
+                </option>
+              </select>
+            </div>
+            
+            <div class="col-md-3 form-group">
+              	<label for="bookingdate">Fecha Reserva:</label>
+				<input type="date" class="form-control" th:field="*{bookingDate}" id="bookingdate"></input>
+              	<small class="form-text text-danger" th:if="${#fields.hasErrors('bookingDate')}" th:errors="*{bookingDate}"></small>
+            	<div class="valid-feedback">
+                	Correcto!
+            	</div>
+            </div>
+            
+            
+            <!--SUBMIT-->
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Aceptar</button>
+				<a href="/booking/listar" class="btn btn-danger">Cancelar</a>
+            </div>
+        
+        </form>
+
+      	</div>
+      	
+      	
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+       
+	</body>
+	
+</html>

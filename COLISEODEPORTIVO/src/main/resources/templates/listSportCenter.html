@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <title>El Coliseo Deportivo</title>
+        <link rel="icon" type="image/png" th:href="@{/img/icon.png}">
+        <link rel="stylesheet" th:href="@{/css/main.css}">
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    </head>
+	<body>
+		<div th:replace="fragments/header :: header"></div>
+	
+		<div class="container mt-5">
+			<h2 style="color:white;">Centros Deportivos</h2>
+		</div>
+		      	
+      	<!--TABLA-->
+      	<div class="container mt-5" id="tabla">
+      	<form id="myform">
+      	<a 	style="border-bottom-color: black" th:href="@{/sportcenter/irRegistrar}" id="add-row"
+			type = "button"
+			class= "btn btn-primary btn-md p-2">
+			Agregar Centro Deportivo
+		</a>
+						
+      	<table class="table" id="tabla">
+        	<thead>
+          	<tr>
+            	<th scope="col">ID</th>
+            	<th scope="col">Nombre</th>
+            	<th scope="col">Dirección</th>
+            	<th scope="col" class="text-end">Operaciones</th>
+            	<th scope="col"></th>
+          	</tr>
+        	</thead>
+        	<tbody>
+          	<tr th:each="sportcenter : ${listaSportCenters}">
+            	<td th:text="${sportcenter.sportcenterId}"></td>
+            	<td th:text="${sportcenter.sportcenterName}"></td>
+            	<td th:text="${sportcenter.sportcenterAddress}"></td>
+            	<td class="text-center"><a type="button" class= "btn btn-danger btn-md" th:href="@{/sportcenter/eliminar?id=}+${sportcenter.sportcenterId}"> <img class="me-3" th:src="@{/img/delete.png}" alt="">ELIMINAR</a></td>
+				<td class="text-start"><a type="button" class= "btn btn-warning btn-md" th:href="@{'/sportcenter/modificar/' + ${sportcenter.sportcenterId}}"> <img class="me-3" th:src="@{/img/edit.png}" alt="">MODIFICAR</a></td>
+          	</tr>
+        	</tbody>
+      	</table>
+      	<div th:if="${mensaje}" class="alert alert-danger">
+			<p th:text="${mensaje}"></p>
+		</div>
+      	</form>
+      	</div>
+      	
+      	
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+       
+	</body>
+	
+</html>

@@ -22,7 +22,7 @@ import pe.edu.upc.spring.service.ISportFieldService;
 import pe.edu.upc.spring.service.ISportCenterService;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/sportfield")
 public class SportFieldController {
 	
 	@Autowired
