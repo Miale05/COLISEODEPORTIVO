@@ -31,3 +31,11 @@ build/
 
 ### VS Code ###
 .vscode/
+/.DS_Store
+/.gitignore
+/.mvn/
+/.tern-project
+/mvnw
+/mvnw.cmd
+/pom.xml
+/src/

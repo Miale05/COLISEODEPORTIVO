@@ -35,7 +35,8 @@ public class Booking implements Serializable {
 	@JoinColumn(name="bookingstatusId", nullable=false)
 	private BookingStatus bookingstatus;
 
-	@Column(name="fieldscheduleId", nullable=false)
+	@ManyToOne
+	@JoinColumn(name="fieldscheduleId", nullable=false)
 	private FieldSchedule fieldschedule;
 	
 	@Temporal(TemporalType.DATE)
