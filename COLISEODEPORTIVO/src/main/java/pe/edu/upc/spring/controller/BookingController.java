@@ -16,12 +16,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.spring.model.Booking;
-import pe.edu.upc.spring.model.Client;
+import pe.edu.upc.spring.model.User;
 import pe.edu.upc.spring.model.BookingStatus;
 import pe.edu.upc.spring.model.FieldSchedule;
 
 import pe.edu.upc.spring.service.IBookingService;
-import pe.edu.upc.spring.service.IClientService;
+import pe.edu.upc.spring.service.IUserService;
 import pe.edu.upc.spring.service.IBookingStatusService;
 import pe.edu.upc.spring.service.IFieldScheduleService;
 
@@ -33,7 +33,7 @@ public class BookingController {
 	private IBookingService bService;
 	
 	@Autowired
-	private IClientService cService;
+	private IUserService uService;
 	
 	@Autowired
 	private IBookingStatusService bsService;
@@ -55,12 +55,12 @@ public class BookingController {
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		
-		model.addAttribute("listaClients", cService.listar());
+		model.addAttribute("listaUsers", uService.listar());
 		model.addAttribute("listaBookingStatus", bsService.listar());
 		model.addAttribute("listaFieldSchedules", fsService.listar());
 		
 		model.addAttribute("booking", new Booking());
-		model.addAttribute("client", new Client());
+		model.addAttribute("user", new User());
 		model.addAttribute("bookingstatus", new BookingStatus());
 		model.addAttribute("fieldschedule", new FieldSchedule());
 		
@@ -71,7 +71,7 @@ public class BookingController {
 	public String registrar(@ModelAttribute Booking objBooking, BindingResult binRes, Model model) throws ParseException { 
 		
 		if (binRes.hasErrors()) {
-			model.addAttribute("listaClients", cService.listar());
+			model.addAttribute("listaUsers", uService.listar());
 			model.addAttribute("listaBookingStatus", bsService.listar());
 			model.addAttribute("listaFieldSchedules", fsService.listar());
 			return "booking";
@@ -97,7 +97,7 @@ public class BookingController {
 			return "redirect:/booking/listar";
 		}
 		else {
-			model.addAttribute("listaClients", cService.listar());
+			model.addAttribute("listaUsers", uService.listar());
 			model.addAttribute("listaBookingStatus", bsService.listar());
 			model.addAttribute("listaFieldSchedules", fsService.listar());
 			

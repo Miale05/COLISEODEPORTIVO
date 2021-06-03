@@ -47,6 +47,17 @@
                 </option>
               </select>
             </div>
+            
+            <div class="col-md-3">
+              <label for="sport" class="form-label">Deporte:</label>
+              <select class="form-select"  th:field="*{sport.sportId}">
+                <option th:each="s:${listaSports}" 
+                		th:value="${s.sportId}" 
+                		th:text="${s.sportName}"
+                		th:selected="(${s.sportId} == *{sport.sportId})">
+                </option>
+              </select>
+            </div>
                    
             <!--SUBMIT-->
             <div class="col-12">

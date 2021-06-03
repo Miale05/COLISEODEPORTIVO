@@ -17,9 +17,11 @@ import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.spring.model.SportField;
 import pe.edu.upc.spring.model.SportCenter;
+import pe.edu.upc.spring.model.Sport;
 
 import pe.edu.upc.spring.service.ISportFieldService;
 import pe.edu.upc.spring.service.ISportCenterService;
+import pe.edu.upc.spring.service.ISportService;
 
 @Controller
 @RequestMapping("/sportfield")
@@ -30,6 +32,9 @@ public class SportFieldController {
 	
 	@Autowired
 	private ISportCenterService scService;
+	
+	@Autowired
+	private ISportService sService;
 	
 	@RequestMapping("/home")
 	public String irSportFieldBienvenido() {
@@ -46,9 +51,11 @@ public class SportFieldController {
 	public String irPaginaRegistrar(Model model) {
 		
 		model.addAttribute("listaSportCenters", scService.listar());
+		model.addAttribute("listaSports", sService.listar());
 		
 		model.addAttribute("sportfield", new SportField());
 		model.addAttribute("sportcenter", new SportCenter());
+		model.addAttribute("sport", new Sport());
 		
 		return "sportfield";
 	}
@@ -58,6 +65,7 @@ public class SportFieldController {
 		
 		if (binRes.hasErrors()) {
 			model.addAttribute("listaSportCenters", scService.listar());
+			model.addAttribute("listaSports", sService.listar());
 			return "sportfield";
 		}
 		else {
@@ -82,6 +90,7 @@ public class SportFieldController {
 		}
 		else {
 			model.addAttribute("listaSportCenters", scService.listar());
+			model.addAttribute("listaSports", sService.listar());
 			
 			if(objSportField.isPresent())
 				objSportField.ifPresent(o -> model.addAttribute("sportfield", o));

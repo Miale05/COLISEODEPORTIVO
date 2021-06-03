@@ -32,7 +32,7 @@
               <select class="form-select"  th:field="*{sportfield.sportfieldId}">
                 <option th:each="sf:${listaSportFields}" 
                 		th:value="${sf.sportfieldId}" 
-                		th:text="${sf.sportfieldName + ' ' + sf.sportcenter.sportcenterName}"
+                		th:text="${sf.sportfieldName + ' ' + sf.sportcenter.sportcenterName + ' ' + sf.sport.sportName}"
                 		th:selected="(${sf.sportfieldId} == *{sportfield.sportfieldId})">
                 </option>
               </select>

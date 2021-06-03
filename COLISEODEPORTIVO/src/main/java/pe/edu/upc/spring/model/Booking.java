@@ -28,8 +28,8 @@ public class Booking implements Serializable {
 	private int bookingId;
 		
 	@ManyToOne
-	@JoinColumn(name="clientId", nullable=false)
-	private Client client;
+	@JoinColumn(name="userId", nullable=false)
+	private User user;
 	
 	@ManyToOne
 	@JoinColumn(name="bookingstatusId", nullable=false)
@@ -48,11 +48,11 @@ public class Booking implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Booking(int bookingId, Client client, BookingStatus bookingstatus, FieldSchedule fieldschedule,
+	public Booking(int bookingId, User user, BookingStatus bookingstatus, FieldSchedule fieldschedule,
 			Date bookingDate) {
 		super();
 		this.bookingId = bookingId;
-		this.client = client;
+		this.user = user;
 		this.bookingstatus = bookingstatus;
 		this.fieldschedule = fieldschedule;
 		this.bookingDate = bookingDate;
@@ -66,12 +66,12 @@ public class Booking implements Serializable {
 		this.bookingId = bookingId;
 	}
 
-	public Client getClient() {
-		return client;
+	public User getUser() {
+		return user;
 	}
 
-	public void setClient(Client client) {
-		this.client = client;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public BookingStatus getBookingstatus() {
@@ -98,4 +98,5 @@ public class Booking implements Serializable {
 		this.bookingDate = bookingDate;
 	}
 
+	
 }

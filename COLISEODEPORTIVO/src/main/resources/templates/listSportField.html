@@ -31,6 +31,7 @@
             	<th scope="col">ID</th>
             	<th scope="col">Nombre</th>
             	<th scope="col">Centro Deportivo</th>
+            	<th scope="col">Deporte</th>
             	<th scope="col" class="text-end">Operaciones</th>
             	<th scope="col"></th>
           	</tr>
@@ -40,6 +41,7 @@
             	<td th:text="${sportfield.sportfieldId}"></td>
             	<td th:text="${sportfield.sportfieldName}"></td>
             	<td th:text="${sportfield.sportcenter.sportcenterName}"></td>
+            	<td th:text="${sportfield.sport.sportName}"></td>
             	<td class="text-center"><a type="button" class= "btn btn-danger btn-md" th:href="@{/sportfield/eliminar?id=}+${sportfield.sportfieldId}"> <img class="me-3" th:src="@{/img/delete.png}" alt="">ELIMINAR</a></td>
 				<td class="text-start"><a type="button" class= "btn btn-warning btn-md" th:href="@{'/sportfield/modificar/' + ${sportfield.sportfieldId}}"> <img class="me-3" th:src="@{/img/edit.png}" alt="">MODIFICAR</a></td>
           	</tr>

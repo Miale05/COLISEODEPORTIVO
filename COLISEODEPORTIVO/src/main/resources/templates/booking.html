@@ -29,11 +29,11 @@
             
             <div class="col-md-3">
               <label for="user" class="form-label">Usuario:</label>
-              <select class="form-select"  th:field="*{client.user.userId}">
-                <option th:each="c:${listaUsers}" 
-                		th:value="${c.user.userId}" 
-                		th:text="${c.user.userEmail}"
-                		th:selected="(${c.user.userId} == *{client.user.userId})">
+              <select class="form-select"  th:field="*{user.userId}">
+                <option th:each="u:${listaUsers}" 
+                		th:value="${u.userId}" 
+                		th:text="${u.userEmail}"
+                		th:selected="(${u.userId} == *{user.userId})">
                 </option>
               </select>
             </div>
@@ -41,10 +41,11 @@
         	<div class="col-md-6">
               <label for="fieldschedule" class="form-label">Cancha:</label>
               <select class="form-select"  th:field="*{fieldschedule.fieldscheduleId}">
-                <option th:each="fs:${listaFielSchedules}" 
+                <option th:each="fs:${listaFieldSchedules}" 
                 		th:value="${fs.fieldscheduleId}" 
-                		th:text="${fs.sportfield.sportfieldName + ' ' + fs.sportfield.sportcenter.sportcenterName
-                				+ ' ' + fs.schedule.scheduleStart + '-' + fs.schedule.scheduleEnd + ' ' + fs.fieldschedulePrice}"
+                		th:text="${fs.sportfield.sportfieldName + ' ' + fs.sportfield.sportcenter.sportcenterName + ' ' + 
+                			fs.sportfield.sport.sportName + ' / ' + fs.schedule.scheduleStart + '-' + fs.schedule.scheduleEnd + ' / ' + 
+                			fs.fieldschedulePrice + ' soles '}"
                 		th:selected="(${fs.fieldscheduleId} == *{fieldschedule.fieldscheduleId})">
                 </option>
               </select>

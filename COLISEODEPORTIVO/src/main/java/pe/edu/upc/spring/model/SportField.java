@@ -28,17 +28,22 @@ public class SportField implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="sportcenterId", nullable=false)
 	private SportCenter sportcenter;
+	
+	@ManyToOne
+	@JoinColumn(name="sportId", nullable=false)
+	private Sport sport;
 
 	public SportField() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public SportField(int sportfieldId, String sportfieldName, SportCenter sportcenter) {
+	public SportField(int sportfieldId, String sportfieldName, SportCenter sportcenter, Sport sport) {
 		super();
 		this.sportfieldId = sportfieldId;
 		this.sportfieldName = sportfieldName;
 		this.sportcenter = sportcenter;
+		this.sport = sport;
 	}
 
 	public int getSportfieldId() {
@@ -65,4 +70,13 @@ public class SportField implements Serializable {
 		this.sportcenter = sportcenter;
 	}
 
+	public Sport getSport() {
+		return sport;
+	}
+
+	public void setSport(Sport sport) {
+		this.sport = sport;
+	}
+
+	
 }

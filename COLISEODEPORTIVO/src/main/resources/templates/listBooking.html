@@ -44,7 +44,7 @@
         	<tbody>
           	<tr th:each="booking : ${listaBookings}">
           		<td th:text="${booking.bookingId}"></td>
-          		<td th:text="${booking.client.user.userEmail}"></td>
+          		<td th:text="${booking.user.userEmail}"></td>
             	<td th:text="${booking.fieldschedule.sportfield.sportfieldName}"></td>
             	<td th:text="${booking.fieldschedule.sportfield.sportcenter.sportcenterName}"></td>
             	<td th:text="${booking.fieldschedule.schedule.scheduleStart}"></td>

@@ -39,7 +39,7 @@
         	<tbody>
           	<tr th:each="fieldschedule : ${listaFieldSchedules}">
           		<td th:text="${fieldschedule.fieldscheduleId}"></td>
-            	<td th:text="${fieldschedule.sportfield.sportfieldName + ' ' + fieldschedule.sportfield.sportcenter.sportcenterName}"></td>
+            	<td th:text="${fieldschedule.sportfield.sportfieldName + ' ' + fieldschedule.sportfield.sportcenter.sportcenterName + ' ' + fieldschedule.sportfield.sport.sportName}"></td>
             	<td th:text="${fieldschedule.schedule.scheduleStart + '-' + fieldschedule.schedule.scheduleEnd}"></td>
             	<td th:text="${fieldschedule.fieldschedulePrice}"></td>
             	<td class="text-center"><a type="button" class= "btn btn-danger btn-md" th:href="@{/fieldschedule/eliminar?id=}+${fieldschedule.fieldscheduleId}"> <img class="me-3" th:src="@{/img/delete.png}" alt="">ELIMINAR</a></td>
