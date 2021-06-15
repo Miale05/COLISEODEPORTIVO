@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
-import pe.edu.upc.spring.model.User;
+import pe.edu.upc.spring.model.Users;
 import pe.edu.upc.spring.model.Role;
 
 import pe.edu.upc.spring.service.IUserService;
@@ -47,14 +47,14 @@ public class UserController {
 		
 		model.addAttribute("listaRoles", rService.listar());
 		
-		model.addAttribute("user", new User());
+		model.addAttribute("user", new Users());
 		model.addAttribute("role", new Role());
 		
 		return "user";
 	}
 	
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute User objUser, BindingResult binRes, Model model) throws ParseException { 
+	public String registrar(@ModelAttribute Users objUser, BindingResult binRes, Model model) throws ParseException { 
 		
 		if (binRes.hasErrors()) {
 			model.addAttribute("listaRoles", rService.listar());
@@ -74,7 +74,7 @@ public class UserController {
 	@RequestMapping("/modificar/{id}")
 	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir) throws ParseException {
 		
-		Optional<User> objUser = uService.listarId(id);
+		Optional<Users> objUser = uService.listarId(id);
 		
 		if(objUser == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");

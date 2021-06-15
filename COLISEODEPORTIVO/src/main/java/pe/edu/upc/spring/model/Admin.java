@@ -24,7 +24,7 @@ public class Admin implements Serializable {
 		
 	@OneToOne
 	@JoinColumn(name="userId", nullable=false)
-	private User user;
+	private Users user;
 	
 	@ManyToOne
 	@JoinColumn(name="sportcenterId", nullable=false)
@@ -35,7 +35,7 @@ public class Admin implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Admin(int adminId, User user, SportCenter sportcenter) {
+	public Admin(int adminId, Users user, SportCenter sportcenter) {
 		super();
 		this.adminId = adminId;
 		this.user = user;
@@ -50,11 +50,11 @@ public class Admin implements Serializable {
 		this.adminId = adminId;
 	}
 
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 

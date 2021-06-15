@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.spring.model.Admin;
-import pe.edu.upc.spring.model.User;
+import pe.edu.upc.spring.model.Users;
 import pe.edu.upc.spring.model.SportCenter;
 
 import pe.edu.upc.spring.service.IAdminService;
@@ -54,7 +54,7 @@ public class AdminController {
 		model.addAttribute("listaUsers", uService.listar());
 		
 		model.addAttribute("admin", new Admin());
-		model.addAttribute("user", new User());
+		model.addAttribute("user", new Users());
 		model.addAttribute("sportcenter", new SportCenter());
 		
 		return "admin";

@@ -23,14 +23,14 @@ public class Client implements Serializable {
 		
 	@OneToOne
 	@JoinColumn(name="userId", nullable=false)
-	private User user;
+	private Users user;
 
 	public Client() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Client(int clientId, User user) {
+	public Client(int clientId, Users user) {
 		super();
 		this.clientId = clientId;
 		this.user = user;
@@ -44,11 +44,11 @@ public class Client implements Serializable {
 		this.clientId = clientId;
 	}
 
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 

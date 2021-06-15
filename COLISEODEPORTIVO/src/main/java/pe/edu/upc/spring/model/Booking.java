@@ -29,7 +29,7 @@ public class Booking implements Serializable {
 		
 	@ManyToOne
 	@JoinColumn(name="userId", nullable=false)
-	private User user;
+	private Users user;
 	
 	@ManyToOne
 	@JoinColumn(name="bookingstatusId", nullable=false)
@@ -49,7 +49,7 @@ public class Booking implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Booking(int bookingId, User user, BookingStatus bookingstatus, FieldSchedule fieldschedule,
+	public Booking(int bookingId, Users user, BookingStatus bookingstatus, FieldSchedule fieldschedule,
 			Date bookingDate) {
 		super();
 		this.bookingId = bookingId;
@@ -67,11 +67,11 @@ public class Booking implements Serializable {
 		this.bookingId = bookingId;
 	}
 
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 

@@ -19,18 +19,18 @@ public class Role implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int roleId;
 	
-	@Column(name="roleDescription", length = 20, nullable=false)
-	private String roleDescription;
+	@Column(name="authority", length = 20, nullable=false)
+	private String authority;
 
 	public Role() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Role(int roleId, String roleDescription) {
+	public Role(int roleId, String authority) {
 		super();
 		this.roleId = roleId;
-		this.roleDescription = roleDescription;
+		this.authority = authority;
 	}
 
 	public int getRoleId() {
@@ -41,12 +41,13 @@ public class Role implements Serializable {
 		this.roleId = roleId;
 	}
 
-	public String getRoleDescription() {
-		return roleDescription;
+	public String getAuthority() {
+		return authority;
 	}
 
-	public void setRoleDescription(String roleDescription) {
-		this.roleDescription = roleDescription;
+	public void setAuthority(String authority) {
+		this.authority = authority;
 	}
+
 	
 }

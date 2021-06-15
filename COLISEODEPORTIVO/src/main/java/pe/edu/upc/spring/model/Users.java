@@ -1,27 +1,32 @@
 package pe.edu.upc.spring.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name="Users", uniqueConstraints = @UniqueConstraint(columnNames = "userEmail"))
-public class User implements Serializable {
+@Table(name="Users")
+public class Users implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
+	
+	@Column(name="username", length = 30, unique=true)
+	private String username;
 	
 	@Column(name="userNames", length = 30, nullable=false)
 	private String userNames;
@@ -35,28 +40,29 @@ public class User implements Serializable {
 	@Column(name="userEmail", length = 50, nullable=false)
 	private String userEmail;
 	
-	@Column(name="userPassword", length = 30, nullable=false)
+	@Column(name="userPassword", unique=true)
 	private String userPassword;
 	
-	@ManyToOne
-	@JoinColumn(name="roleId", nullable=false)
-	private Role role;
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="user_id")
+	private List<Role> roles;
 
-	public User() {
+	public Users() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int userId, String userNames, String userFirstName, String userLastName,
-			String userEmail, String userPassword, Role role) {
+	public Users(int userId, String username, String userNames, String userFirstName, String userLastName,
+			String userEmail, String userPassword, List<Role> roles) {
 		super();
 		this.userId = userId;
+		this.username = username;
 		this.userNames = userNames;
 		this.userFirstName = userFirstName;
 		this.userLastName = userLastName;
 		this.userEmail = userEmail;
 		this.userPassword = userPassword;
-		this.role = role;
+		this.roles = roles;
 	}
 
 	public int getUserId() {
@@ -65,6 +71,14 @@ public class User implements Serializable {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getUserNames() {
@@ -107,13 +121,13 @@ public class User implements Serializable {
 		this.userPassword = userPassword;
 	}
 
-	public Role getRole() {
-		return role;
+	public List<Role> getRoles() {
+		return roles;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
-	
+
 	
 }

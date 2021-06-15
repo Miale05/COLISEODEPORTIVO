@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
-import pe.edu.upc.spring.model.User;
+import pe.edu.upc.spring.model.Users;
 import pe.edu.upc.spring.model.Client;
 
 import pe.edu.upc.spring.service.IUserService;
@@ -48,7 +48,7 @@ public class ClientController {
 		model.addAttribute("listaUsers", uService.listar());
 		
 		model.addAttribute("client", new Client());
-		model.addAttribute("user", new User());
+		model.addAttribute("user", new Users());
 		
 		return "client";
 	}

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pe.edu.upc.spring.model.User;
+import pe.edu.upc.spring.model.Users;
 import pe.edu.upc.spring.service.IUserService;
 import pe.edu.upc.spring.repository.IUserRepository;
 
@@ -19,8 +19,8 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	@Transactional
-	public boolean insertar(User user) {
-		User objUser = dUser.save(user) ;
+	public boolean insertar(Users user) {
+		Users objUser = dUser.save(user) ;
 		if(objUser != null)
 			return true;
 		else
@@ -29,7 +29,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	@Transactional
-	public boolean modificar(User user) {
+	public boolean modificar(Users user) {
 		return true;
 	}
 
@@ -42,13 +42,13 @@ public class UserServiceImpl implements IUserService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<User> listarId(int userId) {
+	public Optional<Users> listarId(int userId) {
 		return dUser.findById(userId);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<User> listar() {
+	public List<Users> listar() {
 		return dUser.findAll();
 	}
 	
