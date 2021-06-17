@@ -60,7 +60,7 @@ public class BookingController {
 		model.addAttribute("listaFieldSchedules", fsService.listar());
 		
 		model.addAttribute("booking", new Booking());
-		model.addAttribute("user", new User());
+		model.addAttribute("user", new Users());
 		model.addAttribute("bookingstatus", new BookingStatus());
 		model.addAttribute("fieldschedule", new FieldSchedule());
 		
