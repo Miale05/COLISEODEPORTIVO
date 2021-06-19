@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import pe.edu.upc.spring.auth.handler.LoginSuccessHandler;
 import pe.edu.upc.spring.serviceimpl.JpaUserDetailsService;
@@ -36,8 +37,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/fieldschedule/**").access("hasRole('ROLE_ADMIN')")
 				.antMatchers("/booking/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 				.antMatchers("/welcome/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')").and()
-				.formLogin().successHandler(successHandler).loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/welcome/bienvenido")
-				.permitAll().and().logout().logoutSuccessUrl("/login").permitAll().and().exceptionHandling().accessDeniedPage("/error_403");
+				.formLogin().successHandler(successHandler).loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/welcome/home")
+				.permitAll()
+				.and()
+				.logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout").permitAll().and().exceptionHandling().accessDeniedPage("/error_403");
 		}
 		catch(Exception ex) {
 			System.out.println(ex.getMessage());

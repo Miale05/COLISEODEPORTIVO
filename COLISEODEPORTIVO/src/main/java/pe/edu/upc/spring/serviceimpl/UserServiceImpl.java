@@ -20,7 +20,7 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	@Transactional
 	public boolean insertar(Users user) {
-		Users objUser = dUser.save(user) ;
+		Users objUser = dUser.save(user);
 		if(objUser != null)
 			return true;
 		else
