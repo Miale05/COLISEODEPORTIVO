@@ -19,37 +19,38 @@
       	<!--TABLA-->
       	<div class="container mt-5" id="tabla">
       	<form id="myform">
-      	<a 	style="border-bottom-color: black" th:href="@{/user/irRegistrar}" id="add-row"
+      	<!-- <a 	style="border-bottom-color: black" th:href="@{/user/irRegistrar}" id="add-row"
 			type = "button"
 			class= "btn btn-primary btn-md p-2">
 			Agregar Usuario
-		</a>
+		</a> -->
 						
       	<table class="table" id="tabla">
         	<thead>
           	<tr>
             	<th scope="col">ID</th>
-            	<th scope="col">Role</th>
+            	<!-- <th scope="col">Role</th> -->
             	<th scope="col">Name</th>
             	<th scope="col">First Name</th>
             	<th scope="col">Last Name</th>
             	<th scope="col">Email</th>
+            	<th scope="col">Username</th>
             	<th scope="col">Password</th>
-            	<th scope="col" class="text-end">Operaciones</th>
+            	<th scope="col" class="text-center">Operaciones</th>
             	<th scope="col"></th>
           	</tr>
         	</thead>
         	<tbody>
           	<tr th:each="user : ${listaUsers}">
             	<td th:text="${user.userId}"></td>
-            	<td th:text="${user.role.roleDescription}"></td>
+            	<!-- <td th:text="${user.role.authority}"></td> -->
             	<td th:text="${user.userNames}"></td>
             	<td th:text="${user.userFirstName}"></td>
             	<td th:text="${user.userLastName}"></td>
             	<td th:text="${user.userEmail}"></td>
+            	<td th:text="${user.username}"></td>
             	<td th:text="${user.userPassword}"></td>
             	<td class="text-center"><a type="button" class= "btn btn-danger btn-md" th:href="@{/user/eliminar?id=}+${user.userId}"> <img class="me-3" th:src="@{/img/delete.png}" alt="">ELIMINAR</a></td>
-				<td class="text-start"><a type="button" class= "btn btn-warning btn-md" th:href="@{'/user/modificar/' + ${user.userId}}"> <img class="me-3" th:src="@{/img/edit.png}" alt="">MODIFICAR</a></td>
           	</tr>
         	</tbody>
       	</table>

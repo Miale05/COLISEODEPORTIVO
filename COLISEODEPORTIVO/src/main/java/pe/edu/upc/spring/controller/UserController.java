@@ -63,7 +63,7 @@ public class UserController {
 		else {
 			boolean flag = uService.insertar(objUser);
 			if (flag)
-				return "redirect:/user/listar";
+				return "redirect:/login";
 			else {
 				model.addAttribute("mensaje", "Ocurrio un error");
 				return "redirect:/user/irRegistrar";

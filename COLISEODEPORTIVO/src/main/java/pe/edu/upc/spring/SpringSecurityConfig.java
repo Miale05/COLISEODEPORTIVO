@@ -28,8 +28,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		try {
 			http.authorizeRequests()
-				.antMatchers("/role/**").access("hasRole('ROLE_ADMIN')")
-				.antMatchers("/user/**").access("hasRole('ROLE_ADMIN')")
+				//.antMatchers("/role/**").access("hasRole('ROLE_ADMIN')")
+				//.antMatchers("/user/**").access("hasRole('ROLE_ADMIN')")
 				.antMatchers("/sportcenter/**").access("hasRole('ROLE_ADMIN')")
 				.antMatchers("/sport/**").access("hasRole('ROLE_ADMIN')")
 				.antMatchers("/schedule/**").access("hasRole('ROLE_ADMIN')")

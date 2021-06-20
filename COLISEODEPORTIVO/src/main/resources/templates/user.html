@@ -10,10 +10,9 @@
         <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     </head>
 	<body>
-		<div th:replace="fragments/header :: header"></div>
 	
 		<div class="container mt-5">
-			<h2 style="color:white;">Usuarios</h2>
+			<h2 style="color:white;">Registrar Usuario</h2>
 		</div>
 		<!-- FORMULARIO REGSITRAR-->
         <div class="container mt-5" id="formulario" >
@@ -27,16 +26,16 @@
                 <input type="text" class="form-control" th:field="*{userId}">
             </div>
             
-            <div class="col-md-2">
+            <!-- <div class="col-md-2">
               <label for="role" class="form-label">Rol:</label>
               <select class="form-select"  th:field="*{role.roleId}">
                 <option th:each="r:${listaRoles}" 
                 		th:value="${r.roleId}" 
-                		th:text="${r.roleDescription}"
+                		th:text="${r.authority}"
                 		th:selected="(${r.roleId} == *{role.roleId})">
                 </option>
               </select>
-            </div>
+            </div> -->
         	
             <div class="col-md-3 form-group">
               	<label for="name" class="form-label">Nombre:</label>
@@ -65,7 +64,7 @@
             	</div>
             </div>
               
-            <div class="col-md-6 form-group">
+            <div class="col-md-4 form-group">
               	<label for="email" class="form-label">Email:</label>
               	<input type="text" class="form-control" id="email" value="" required th:field="*{userEmail}">
               	<small class="form-text text-danger" th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}"></small>
@@ -74,7 +73,16 @@
             	</div>
             </div>
             
-            <div class="col-md-6 form-group">
+            <div class="col-md-4 form-group">
+              	<label for="username" class="form-label">Username:</label>
+              	<input type="text" class="form-control" id="username" value="" required th:field="*{username}">
+              	<small class="form-text text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
+            	<div class="valid-feedback">
+                	Correcto!
+            	</div>
+            </div>
+            
+            <div class="col-md-4 form-group">
               	<label for="password" class="form-label">Password:</label>
               	<input type="password" class="form-control" id="password" value="" required th:field="*{userPassword}">
               	<small class="form-text text-danger" th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}"></small>
@@ -86,7 +94,7 @@
             <!--SUBMIT-->
             <div class="col-12">
               <button type="submit" class="btn btn-primary">Aceptar</button>
-				<a href="/user/listar" class="btn btn-danger">Cancelar</a>
+				<a href="/login" class="btn btn-danger">Cancelar</a>
             </div>
         
         </form>

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,9 +18,13 @@ public class UserServiceImpl implements IUserService {
 	@Autowired
 	private IUserRepository dUser;
 
+	@Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+	
 	@Override
 	@Transactional
 	public boolean insertar(Users user) {
+		
 		Users objUser = dUser.save(user);
 		if(objUser != null)
 			return true;
