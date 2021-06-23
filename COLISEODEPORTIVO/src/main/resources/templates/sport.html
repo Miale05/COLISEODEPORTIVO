@@ -30,7 +30,7 @@
             <div class="col-md-3 form-group">
               	<label for="name" class="form-label">Nombre:</label>
               	<input type="text" class="form-control" id="name" value="Futbol" required th:field="*{sportName}">
-              	<small class="form-text text-danger" th:if="${#fields.hasErrors('sportName')}" th:errors="*{sportName}"></small>
+              	<div class="alert alert-danger" th:if="${#fields.hasErrors('sportName')}" th:errors="*{sportName}"></div>
             	<div class="valid-feedback">
                 	Correcto!
             	</div>

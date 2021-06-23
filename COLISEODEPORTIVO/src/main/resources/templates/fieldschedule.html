@@ -52,7 +52,7 @@
             <div class="col-md-3 form-group">
               	<label for="price" class="form-label">Precio:</label>
               	<input type="number" class="form-control" id="price" value="" required th:field="*{fieldschedulePrice}">
-              	<small class="form-text text-danger" th:if="${#fields.hasErrors('fieldschedulePrice')}" th:errors="*{fieldschedulePrice}"></small>
+              	<div class="alert alert-danger" th:if="${#fields.hasErrors('fieldschedulePrice')}" th:errors="*{fieldschedulePrice}"></div>
             	<div class="valid-feedback">
                 	Correcto!
             	</div>

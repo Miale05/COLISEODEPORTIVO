@@ -40,7 +40,7 @@
             <div class="col-md-3 form-group">
               	<label for="name" class="form-label">Nombre:</label>
               	<input type="text" class="form-control" id="name" value="" required th:field="*{userNames}">
-              	<small class="form-text text-danger" th:if="${#fields.hasErrors('userNames')}" th:errors="*{userNames}"></small>
+              	<div class="alert alert-danger" th:if="${#fields.hasErrors('userNames')}" th:errors="*{userNames}"></div>
             	<div class="valid-feedback">
                 	Correcto!
             	</div>
@@ -49,7 +49,7 @@
             <div class="col-md-3 form-group">
               	<label for="firstLastName" class="form-label">Apellido Paterno:</label>
               	<input type="text" class="form-control" id="firstLastName" value="" required th:field="*{userFirstName}">
-              	<small class="form-text text-danger" th:if="${#fields.hasErrors('userFirstName')}" th:errors="*{userFirstName}"></small>
+              	<div class="alert alert-danger" th:if="${#fields.hasErrors('userFirstName')}" th:errors="*{userFirstName}"></div>
             	<div class="valid-feedback">
                 	Correcto!
             	</div>
@@ -58,7 +58,7 @@
             <div class="col-md-3 form-group">
               	<label for="secondLastName" class="form-label">Apellido Materno:</label>
               	<input type="text" class="form-control" id="secondLastName" value="" required th:field="*{userLastName}">
-              	<small class="form-text text-danger" th:if="${#fields.hasErrors('userLastName')}" th:errors="*{userLastName}"></small>
+              	<div class="alert alert-danger" th:if="${#fields.hasErrors('userLastName')}" th:errors="*{userLastName}"></div>
             	<div class="valid-feedback">
                 	Correcto!
             	</div>
@@ -67,7 +67,7 @@
             <div class="col-md-4 form-group">
               	<label for="email" class="form-label">Email:</label>
               	<input type="text" class="form-control" id="email" value="" required th:field="*{userEmail}">
-              	<small class="form-text text-danger" th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}"></small>
+              	<div class="alert alert-danger" th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}"></div>
             	<div class="valid-feedback">
                 	Correcto!
             	</div>
@@ -76,7 +76,7 @@
             <div class="col-md-4 form-group">
               	<label for="username" class="form-label">Username:</label>
               	<input type="text" class="form-control" id="username" value="" required th:field="*{username}">
-              	<small class="form-text text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
+              	<div class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
             	<div class="valid-feedback">
                 	Correcto!
             	</div>
@@ -85,7 +85,7 @@
             <div class="col-md-4 form-group">
               	<label for="password" class="form-label">Password:</label>
               	<input type="password" class="form-control" id="password" value="" required th:field="*{userPassword}">
-              	<small class="form-text text-danger" th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}"></small>
+              	<div class="alert alert-danger" th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}"></div>
             	<div class="valid-feedback">
                 	Correcto!
             	</div>

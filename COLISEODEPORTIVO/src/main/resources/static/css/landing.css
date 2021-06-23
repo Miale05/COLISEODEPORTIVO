@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #02121C;
+}
+
+.footer {
+    width: 100%;
+    margin-top: -50px;
+    background-color: #3E9E81;   
+}
+
+.campos {
+    transition: all ease-out 0.2s;
+}
+
+.campos:hover{
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.6);
+    transform: scale(1.1) translate(1px, 1px);
+}
