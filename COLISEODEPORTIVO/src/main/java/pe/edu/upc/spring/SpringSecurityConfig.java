@@ -29,7 +29,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		try {
 			http.authorizeRequests()
 				//.antMatchers("/role/**").access("hasRole('ROLE_ADMIN')")
-				//.antMatchers("/user/**").access("hasRole('ROLE_ADMIN')")
+				.antMatchers("/user/listar").access("hasRole('ROLE_ADMIN')")
 				.antMatchers("/sportcenter/**").access("hasRole('ROLE_ADMIN')")
 				.antMatchers("/sport/**").access("hasRole('ROLE_ADMIN')")
 				.antMatchers("/schedule/**").access("hasRole('ROLE_ADMIN')")
