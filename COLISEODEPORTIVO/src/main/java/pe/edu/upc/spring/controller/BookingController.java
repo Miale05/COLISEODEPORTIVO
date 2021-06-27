@@ -1,5 +1,7 @@
 package pe.edu.upc.spring.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -19,9 +21,10 @@ import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.spring.model.Booking;
 import pe.edu.upc.spring.model.Users;
+import pe.edu.upc.spring.repository.IUserRepository;
 import pe.edu.upc.spring.model.BookingStatus;
 import pe.edu.upc.spring.model.FieldSchedule;
-
+import pe.edu.upc.spring.model.Role;
 import pe.edu.upc.spring.service.IBookingService;
 import pe.edu.upc.spring.service.IUserService;
 import pe.edu.upc.spring.service.IBookingStatusService;
@@ -30,6 +33,9 @@ import pe.edu.upc.spring.service.IFieldScheduleService;
 @Controller
 @RequestMapping("/booking")
 public class BookingController {
+	
+	@Autowired
+	private IUserRepository userRepository;
 	
 	@Autowired
 	private IBookingService bService;
@@ -54,14 +60,45 @@ public class BookingController {
 		return "listBooking";
 	}
 	
+	@SuppressWarnings("unlikely-arg-type")
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		String username = authentication.getPrincipal().toString();
-//      String password = authentication.getCredentials().toString();
-        
-		model.addAttribute("listaUsers", uService.listar());
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		
+		Users user = userRepository.findByUsername(username);
+		boolean isAdmin = false;
+		if (user != null) {
+			for (int i = 0; i < user.getRoles().size(); i++) {
+				Role current = user.getRoles().get(i);
+				if (current.getAuthority().equals("ROLE_ADMIN")) {
+					isAdmin = true;
+				}
+			}
+		}
+		System.out.println(username);
+		System.out.println(user != null);
+		List<Users> users = new ArrayList<Users>();
+		List<Users> currentUsers = uService.listar();
+		System.out.println(currentUsers.size());
+		for (int i = 0; i < currentUsers.size(); i++) {
+			boolean isUser = false;
+			Users current = currentUsers.get(i);
+			for (int j = 0; j < current.getRoles().size(); j++) {
+				Role currentr = current.getRoles().get(j);
+				if (currentr.getAuthority().equals("ROLE_USER")) {
+					isUser = true;
+				}
+			}
+			if (user != null && isUser && (isAdmin || user.getUserId() == current.getUserId())) {
+				users.add(current);
+			}
+		}
+	
+		System.out.println(users.size());
+
+		model.addAttribute("listaUsers", users);
 		model.addAttribute("listaBookingStatus", bsService.listar());
 		model.addAttribute("listaFieldSchedules", fsService.listar());
 		
