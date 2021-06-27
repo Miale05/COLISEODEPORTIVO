@@ -34,12 +34,24 @@ public class ColiseodeportivoApplication implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws  Exception {
-		Role userRole = new Role("ROLE_ADMIN");
-		List<Role> roles = new ArrayList<Role>();
-		roles.add(userRole);
+		Role adminRole = new Role("ROLE_ADMIN");
+		List<Role> adminRoles = new ArrayList<Role>();
+		adminRoles.add(adminRole);
 		
-		Users user = new Users(1,"admin", "admin", "admin", "admin", "admin", passwordEncoder.encode("admin"), roles);
-		uService.insertar(user);
+		Users admin = new Users(1,"admin", "admin", "admin", "admin", "admin", passwordEncoder.encode("admin"), adminRoles);
+		uService.insertar(admin);
+		
+		Role userRole = new Role("ROLE_USER");
+		List<Role> userRoles = new ArrayList<Role>();
+		userRoles.add(userRole);
+		
+		Users user1 = new Users(2, "rafo4950", "Rafael", "Bartra","Zevallos",
+				"rafo.b.1998@gmail.com", passwordEncoder.encode("123456"), userRoles);
+		uService.insertar(user1);
+		
+		Users user2 = new Users(3, "miguel", "Miguel", "Lalala","Lelele",
+				"miguel@gmail.com", passwordEncoder.encode("123456"), userRoles);
+		uService.insertar(user2);
 	}
 
 }

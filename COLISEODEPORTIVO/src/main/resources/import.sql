@@ -6,5 +6,6 @@
 --INSERT INTO role (role_id, authority, user_id) values (1, 'ROLE_ADMIN', 1);
 --INSERT INTO role (role_id, authority, user_id) values (2, 'ROLE_USER', 2);
 
+
 INSERT INTO booking_status (bookingstatus_id, bookingstatus_name) values (1, 'PENDIENTE DE PAGO');
 INSERT INTO booking_status (bookingstatus_id, bookingstatus_name) values (2, 'PAGADO');

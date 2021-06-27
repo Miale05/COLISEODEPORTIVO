@@ -18,8 +18,6 @@ public class UserServiceImpl implements IUserService {
 	@Autowired
 	private IUserRepository dUser;
 
-	@Autowired
-    private BCryptPasswordEncoder passwordEncoder;
 	
 	@Override
 	@Transactional
