@@ -17,6 +17,7 @@ public class Role implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique=true)
 	private int roleId;
 	
 	@Column(name="authority", length = 20, nullable=false)
@@ -27,6 +28,11 @@ public class Role implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Role(String authority) {
+		super();
+		this.authority = authority;
+	}
+	
 	public Role(int roleId, String authority) {
 		super();
 		this.roleId = roleId;

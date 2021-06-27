@@ -38,8 +38,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/fieldschedule/**").access("hasRole('ROLE_ADMIN')")
 				.antMatchers("/booking/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 				.and()
-	            .httpBasic()
-				.and()
 				.formLogin().successHandler(successHandler).loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/welcome/")
 				.permitAll()
 				.and()
@@ -52,11 +50,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		catch(Exception ex) {
 			System.out.println(ex.getMessage());
 		}
-	}
-	
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-	    web.ignoring().antMatchers("/welcome/**");
 	}
 	
 	public void configurerGlobal(AuthenticationManagerBuilder build) throws Exception {

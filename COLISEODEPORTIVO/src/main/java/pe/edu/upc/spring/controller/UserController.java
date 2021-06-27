@@ -1,9 +1,11 @@
 package pe.edu.upc.spring.controller;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +22,7 @@ import pe.edu.upc.spring.model.Role;
 
 import pe.edu.upc.spring.service.IUserService;
 import pe.edu.upc.spring.service.IRoleService;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -30,6 +33,9 @@ public class UserController {
 	
 	@Autowired
 	private IRoleService rService;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@RequestMapping("/home")
 	public String irUserBienvenido() {
@@ -45,10 +51,7 @@ public class UserController {
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
 		
-		model.addAttribute("listaRoles", rService.listar());
-		
 		model.addAttribute("user", new Users());
-		model.addAttribute("role", new Role());
 		
 		return "user";
 	}
@@ -61,6 +64,12 @@ public class UserController {
 			return "user";
 		}
 		else {
+			Role userRole = new Role("ROLE_USER");
+			List<Role> roles = new ArrayList<Role>();
+			roles.add(userRole);
+			objUser.setRoles(roles);
+			String bcryptPassword = passwordEncoder.encode(objUser.getUserPassword());
+			objUser.setUserPassword(bcryptPassword);
 			boolean flag = uService.insertar(objUser);
 			if (flag)
 				return "redirect:/login";
