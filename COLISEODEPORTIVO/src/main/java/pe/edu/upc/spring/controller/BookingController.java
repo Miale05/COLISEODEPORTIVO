@@ -1,5 +1,7 @@
 package pe.edu.upc.spring.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -77,11 +79,8 @@ public class BookingController {
 				}
 			}
 		}
-		System.out.println(username);
-		System.out.println(user != null);
 		List<Users> users = new ArrayList<Users>();
 		List<Users> currentUsers = uService.listar();
-		System.out.println(currentUsers.size());
 		for (int i = 0; i < currentUsers.size(); i++) {
 			boolean isUser = false;
 			Users current = currentUsers.get(i);
@@ -96,8 +95,6 @@ public class BookingController {
 			}
 		}
 	
-		System.out.println(users.size());
-
 		model.addAttribute("listaUsers", users);
 		model.addAttribute("listaBookingStatus", bsService.listar());
 		model.addAttribute("listaFieldSchedules", fsService.listar());
@@ -120,6 +117,17 @@ public class BookingController {
 			return "booking";
 		}
 		else {
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
+			List<Booking> Bookings = bService.listar();
+			for(int i = 0; i < Bookings.size(); i++) {
+				Booking c = Bookings.get(i);
+				if (objBooking.getFieldschedule().getFieldscheduleId() == c.getFieldschedule().getFieldscheduleId()) {
+					if (dateFormat.format(objBooking.getBookingDate()).equals(dateFormat.format(c.getBookingDate()))) {
+						model.addAttribute("mensaje", "El horario ya ha sido tomado");
+						return "redirect:/booking/listar";
+					}
+				}
+			}
 			boolean flag = bService.insertar(objBooking);
 			if (flag)
 				return "redirect:/booking/listar";

@@ -1,5 +1,6 @@
 package pe.edu.upc.spring.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -69,6 +70,18 @@ public class FieldScheduleController {
 			return "fieldschedule";
 		}
 		else {
+			if (objFieldSchedule.getFieldschedulePrice() < 0) {
+				model.addAttribute("mensaje", "El Precio debe ser un numero positivo");
+				return "redirect:/fieldschedule/irRegistrar";
+			}
+			List<FieldSchedule> horarios = fschService.listar();
+			for(int i = 0; i < horarios.size(); i++) {
+				FieldSchedule c = horarios.get(i);
+				if (objFieldSchedule.getSchedule().getScheduleStart().equals(c.getSchedule().getScheduleStart()) && objFieldSchedule.getSchedule().getScheduleEnd().equals(c.getSchedule().getScheduleEnd())) {
+					model.addAttribute("mensaje", "El horario ya existe");
+					return "redirect:/fieldschedule/irRegistrar";
+				}
+			}
 			boolean flag = fschService.insertar(objFieldSchedule);
 			if (flag)
 				return "redirect:/fieldschedule/listar";

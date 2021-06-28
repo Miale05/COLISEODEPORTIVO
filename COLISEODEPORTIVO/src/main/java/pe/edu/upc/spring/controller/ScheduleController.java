@@ -1,5 +1,6 @@
 package pe.edu.upc.spring.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -47,6 +48,15 @@ public class ScheduleController {
 		if (binRes.hasErrors())
 			return "schedule";
 		else {
+			List<Schedule> horarios = schService.listar();
+			for(int i = 0; i < horarios.size(); i++) {
+				Schedule c = horarios.get(i);
+				if (objSchedule.getScheduleStart().equals(c.getScheduleStart()) && objSchedule.getScheduleEnd().equals(c.getScheduleEnd())) {
+					model.addAttribute("mensaje", "El horario ya existe");
+					return "redirect:/schedule/irRegistrar";
+				}
+			}
+			
 			boolean flag = schService.insertar(objSchedule);
 			if (flag)
 				return "redirect:/schedule/listar";
