@@ -74,10 +74,17 @@ public class FieldScheduleController {
 				model.addAttribute("mensaje", "El Precio debe ser un numero positivo");
 				return "redirect:/fieldschedule/irRegistrar";
 			}
+			String start = objFieldSchedule.getSchedule().getScheduleStart();
+			String end = objFieldSchedule.getSchedule().getScheduleEnd();
+			if (start == null || end == null) {
+				model.addAttribute("mensaje", "El intervalo es invalido");
+				return "redirect:/fieldschedule/irRegistrar";
+			}
+			
 			List<FieldSchedule> horarios = fschService.listar();
 			for(int i = 0; i < horarios.size(); i++) {
 				FieldSchedule c = horarios.get(i);
-				if (objFieldSchedule.getSchedule().getScheduleStart().equals(c.getSchedule().getScheduleStart()) && objFieldSchedule.getSchedule().getScheduleEnd().equals(c.getSchedule().getScheduleEnd())) {
+				if (start.equals(c.getSchedule().getScheduleStart()) && end.equals(c.getSchedule().getScheduleEnd())) {
 					model.addAttribute("mensaje", "El horario ya existe");
 					return "redirect:/fieldschedule/irRegistrar";
 				}

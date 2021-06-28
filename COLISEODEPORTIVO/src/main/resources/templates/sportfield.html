@@ -24,7 +24,7 @@
         	
         	<div class="col-md-1">
                 <label for="sportfieldid" class="form-label">ID:</label>
-                <input type="text" class="form-control" th:field="*{sportfieldId}">
+                <input type="text" required class="form-control" th:field="*{sportfieldId}">
             </div>
                 
             
@@ -39,7 +39,7 @@
             	
             <div class="col-md-3">
               <label for="sportcenter" class="form-label">Centro Deportivo:</label>
-              <select class="form-select"  th:field="*{sportcenter.sportcenterId}">
+              <select class="form-select" required  th:field="*{sportcenter.sportcenterId}">
                 <option th:each="sc:${listaSportCenters}" 
                 		th:value="${sc.sportcenterId}" 
                 		th:text="${sc.sportcenterName}"
@@ -50,7 +50,7 @@
             
             <div class="col-md-3">
               <label for="sport" class="form-label">Deporte:</label>
-              <select class="form-select"  th:field="*{sport.sportId}">
+              <select class="form-select" required  th:field="*{sport.sportId}">
                 <option th:each="s:${listaSports}" 
                 		th:value="${s.sportId}" 
                 		th:text="${s.sportName}"

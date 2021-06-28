@@ -24,12 +24,12 @@
         	
         	<div class="col-md-1">
                 <label for="fieldscheduleid" class="form-label">ID:</label>
-                <input type="text" class="form-control" th:field="*{fieldscheduleId}">
+                <input type="text" required class="form-control" th:field="*{fieldscheduleId}">
             </div>
 	
             <div class="col-md-3">
               <label for="sportfield" class="form-label">Cancha:</label>
-              <select class="form-select"  th:field="*{sportfield.sportfieldId}">
+              <select class="form-select" required  th:field="*{sportfield.sportfieldId}">
                 <option th:each="sf:${listaSportFields}" 
                 		th:value="${sf.sportfieldId}" 
                 		th:text="${sf.sportfieldName + ' ' + sf.sportcenter.sportcenterName + ' ' + sf.sport.sportName}"
@@ -40,7 +40,7 @@
             
             <div class="col-md-3">
               <label for="schedule" class="form-label">Horario:</label>
-              <select class="form-select"  th:field="*{schedule.scheduleId}">
+              <select class="form-select" required  th:field="*{schedule.scheduleId}">
                 <option th:each="sch:${listaSchedules}" 
                 		th:value="${sch.scheduleId}" 
                 		th:text="${sch.scheduleStart + '-' + sch.scheduleEnd}"
