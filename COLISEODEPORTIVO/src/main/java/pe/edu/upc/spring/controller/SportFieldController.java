@@ -76,7 +76,7 @@ public class SportFieldController {
 				SportField c = canchas.get(i);
 				if (objSportField.getSportfieldName().equals(c.getSportfieldName()) && objSportField.getSportcenter().getSportcenterId() == c.getSportcenter().getSportcenterId()) {
 					model.addAttribute("mensaje", "La cancha ya existe");
-					return "redirect:/schedule/irRegistrar";
+					return "redirect:/sportfield/irRegistrar";
 				}
 			}
 			boolean flag = sfService.insertar(objSportField);
