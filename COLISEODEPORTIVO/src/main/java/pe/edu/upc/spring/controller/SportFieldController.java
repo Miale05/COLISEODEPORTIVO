@@ -1,5 +1,6 @@
 package pe.edu.upc.spring.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.spring.model.SportField;
 import pe.edu.upc.spring.model.SportCenter;
+import pe.edu.upc.spring.model.Schedule;
 import pe.edu.upc.spring.model.Sport;
 
 import pe.edu.upc.spring.service.ISportFieldService;
@@ -69,6 +71,14 @@ public class SportFieldController {
 			return "sportfield";
 		}
 		else {
+			List<SportField> canchas = sfService.listar();
+			for(int i = 0; i < canchas.size(); i++) {
+				SportField c = canchas.get(i);
+				if (objSportField.getSportfieldName().equals(c.getSportfieldName()) && objSportField.getSportcenter().getSportcenterId() == c.getSportcenter().getSportcenterId()) {
+					model.addAttribute("mensaje", "La cancha ya existe");
+					return "redirect:/schedule/irRegistrar";
+				}
+			}
 			boolean flag = sfService.insertar(objSportField);
 			if (flag)
 				return "redirect:/sportfield/listar";

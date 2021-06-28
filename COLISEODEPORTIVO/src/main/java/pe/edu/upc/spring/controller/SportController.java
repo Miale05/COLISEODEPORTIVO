@@ -1,5 +1,6 @@
 package pe.edu.upc.spring.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.spring.model.Sport;
+import pe.edu.upc.spring.model.SportCenter;
 import pe.edu.upc.spring.service.ISportService;
 
 @Controller
@@ -47,6 +49,14 @@ public class SportController {
 		if (binRes.hasErrors())
 			return "sport";
 		else {
+			List<Sport> deportes = sService.listar();
+			for(int i = 0; i < deportes.size(); i++) {
+				Sport c = deportes.get(i);
+				if (objSport.getSportName().equals(c.getSportName())) {
+					model.addAttribute("mensaje", "El deporte ya existe");
+					return "redirect:/schedule/irRegistrar";
+				}
+			}
 			boolean flag = sService.insertar(objSport);
 			if (flag)
 				return "redirect:/sport/listar";
