@@ -32,14 +32,14 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto text-center">
                         	<!-- <li class="nav-item btn-lg"><a class="nav-link" id="an-opciones" th:href="@{/role/listar}">Roles</a></li>-->
-                            <li class="nav-item btn-lg"><a class="nav-link" id="an-opciones" th:href="@{/user/listar}">Usuarios</a></li> 
-                            <li class="nav-item btn-lg"><a class="nav-link" id="an-opciones" th:href="@{/sportcenter/listar}">Centros Deportivos</a></li>
-                            <li class="nav-item btn-lg"><a class="nav-link" id="an-opciones" th:href="@{/sport/listar}">Deportes</a></li>
-                            <li class="nav-item btn-lg"><a class="nav-link" id="an-opciones" th:href="@{/schedule/listar}">Horarios</a></li>
-                            <li class="nav-item btn-lg"><a class="nav-link" id="an-opciones" th:href="@{/sportfield/listar}">Canchas</a></li>
-                            <li class="nav-item btn-lg"><a class="nav-link" id="an-opciones" th:href="@{/fieldschedule/listar}">Gestion de Horarios</a></li>
-                            <li class="nav-item btn-lg"><a class="nav-link" id="an-opciones" th:href="@{/booking/listar}">Reservas</a></li>
-                            <li class="nav-item btn-lg"><a class="nav-link" id="an-opciones" th:href="@{/logout}">Cerrar Sesion</a></li>
+                            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item btn-lg"><a class="nav-link" id="an-opciones" th:href="@{/user/listar}">Usuarios</a></li> 
+                            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item btn-lg"><a class="nav-link" id="an-opciones" th:href="@{/sportcenter/listar}">Centros Deportivos</a></li>
+                            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item btn-lg"><a class="nav-link" id="an-opciones" th:href="@{/sport/listar}">Deportes</a></li>
+                            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item btn-lg"><a class="nav-link" id="an-opciones" th:href="@{/schedule/listar}">Horarios</a></li>
+                            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item btn-lg"><a class="nav-link" id="an-opciones" th:href="@{/sportfield/listar}">Canchas</a></li>
+                            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item btn-lg"><a class="nav-link" id="an-opciones" th:href="@{/fieldschedule/listar}">Gestion de Horarios</a></li>
+                            <li sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')" class="nav-item btn-lg"><a class="nav-link" id="an-opciones" th:href="@{/booking/listar}">Reservas</a></li>
+                            <li sec:authorize="isAuthenticated()" class="nav-item btn-lg"><a class="nav-link" id="an-opciones" th:href="@{/logout}">Cerrar Sesion</a></li>
                         </ul>
                     </div>
                 </div>
