@@ -54,7 +54,8 @@ public class SportCenterController {
 				SportCenter c = canchas.get(i);
 				if (objSportCenter.getSportcenterName().equals(c.getSportcenterName())) {
 					model.addAttribute("mensaje", "El centro deportivo ya existe");
-					return "redirect:/sportcenter/irRegistrar";
+					model.addAttribute("sportcenter", new SportCenter());
+					return "sportcenter";
 				}
 			}
 			boolean flag = scService.insertar(objSportCenter);

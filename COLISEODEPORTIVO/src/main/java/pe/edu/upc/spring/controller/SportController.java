@@ -54,7 +54,8 @@ public class SportController {
 				Sport c = deportes.get(i);
 				if (objSport.getSportName().equals(c.getSportName())) {
 					model.addAttribute("mensaje", "El deporte ya existe");
-					return "redirect:/sport/irRegistrar";
+					model.addAttribute("sport", new Sport());
+					return "sport";
 				}
 			}
 			boolean flag = sService.insertar(objSport);

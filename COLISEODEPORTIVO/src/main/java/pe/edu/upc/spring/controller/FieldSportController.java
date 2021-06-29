@@ -1,5 +1,6 @@
 package pe.edu.upc.spring.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -69,6 +70,22 @@ public class FieldSportController {
 			return "fieldsport";
 		}
 		else {
+			List<FieldSport> deportes = fsService.listar();
+			for(int i = 0; i < deportes.size(); i++) {
+				FieldSport c = deportes.get(i);
+				if (objFieldSport.getSport().getSportId() == c.getSport().getSportId() && objFieldSport.getSportfield().getSportfieldId() == c.getSportfield().getSportfieldId()) {
+					model.addAttribute("mensaje", "El deporte ya ha sido asignado");
+
+					model.addAttribute("listaSportFields", sfService.listar());
+					model.addAttribute("listaSports", sService.listar());
+					
+					model.addAttribute("fieldsport", new FieldSport());
+					model.addAttribute("sport", new Sport());
+					model.addAttribute("sportfield", new SportField());
+					
+					return "fieldsport";
+				}
+			}
 			boolean flag = fsService.insertar(objFieldSport);
 			if (flag)
 				return "redirect:/fieldsport/listar";

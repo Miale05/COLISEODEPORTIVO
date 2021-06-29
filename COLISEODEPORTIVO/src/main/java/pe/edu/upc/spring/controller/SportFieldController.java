@@ -76,7 +76,14 @@ public class SportFieldController {
 				SportField c = canchas.get(i);
 				if (objSportField.getSportfieldName().equals(c.getSportfieldName()) && objSportField.getSportcenter().getSportcenterId() == c.getSportcenter().getSportcenterId()) {
 					model.addAttribute("mensaje", "La cancha ya existe");
-					return "redirect:/sportfield/irRegistrar";
+					model.addAttribute("listaSportCenters", scService.listar());
+					model.addAttribute("listaSports", sService.listar());
+					
+					model.addAttribute("sportfield", new SportField());
+					model.addAttribute("sportcenter", new SportCenter());
+					model.addAttribute("sport", new Sport());
+					
+					return "sportfield";
 				}
 			}
 			boolean flag = sfService.insertar(objSportField);

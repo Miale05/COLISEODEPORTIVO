@@ -72,12 +72,6 @@ public class FieldScheduleController {
 		else {
 			if (objFieldSchedule.getFieldschedulePrice() < 0) {
 				model.addAttribute("mensaje", "El Precio debe ser un numero positivo");
-				return "redirect:/fieldschedule/irRegistrar";
-			}
-			String start = objFieldSchedule.getSchedule().getScheduleStart();
-			String end = objFieldSchedule.getSchedule().getScheduleEnd();
-			if (start == null || end == null) {
-				model.addAttribute("mensaje", "El intervalo es invalido");
 				model.addAttribute("listaSportFields", sfService.listar());
 				model.addAttribute("listaSchedules", schService.listar());
 				
@@ -87,6 +81,8 @@ public class FieldScheduleController {
 				
 				return "fieldschedule";
 			}
+			String start = objFieldSchedule.getSchedule().getScheduleStart();
+			String end = objFieldSchedule.getSchedule().getScheduleEnd();
 			
 			List<FieldSchedule> horarios = fschService.listar();
 			for(int i = 0; i < horarios.size(); i++) {

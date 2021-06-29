@@ -124,7 +124,45 @@ public class BookingController {
 				if (objBooking.getFieldschedule().getFieldscheduleId() == c.getFieldschedule().getFieldscheduleId()) {
 					if (dateFormat.format(objBooking.getBookingDate()).equals(dateFormat.format(c.getBookingDate()))) {
 						model.addAttribute("mensaje", "El horario ya ha sido tomado");
-						return "redirect:/booking/listar";
+						Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+						String username = authentication.getName();
+						
+						Users user = userRepository.findByUsername(username);
+						boolean isAdmin = false;
+						if (user != null) {
+							for (int x = 0; x < user.getRoles().size(); x++) {
+								Role current = user.getRoles().get(x);
+								if (current.getAuthority().equals("ROLE_ADMIN")) {
+									isAdmin = true;
+								}
+							}
+						}
+						List<Users> users = new ArrayList<Users>();
+						List<Users> currentUsers = uService.listar();
+						for (int h = 0; h < currentUsers.size(); h++) {
+							boolean isUser = false;
+							Users current = currentUsers.get(h);
+							for (int j = 0; j < current.getRoles().size(); j++) {
+								Role currentr = current.getRoles().get(j);
+								if (currentr.getAuthority().equals("ROLE_USER")) {
+									isUser = true;
+								}
+							}
+							if (user != null && isUser && (isAdmin || user.getUserId() == current.getUserId())) {
+								users.add(current);
+							}
+						}
+					
+						model.addAttribute("listaUsers", users);
+						model.addAttribute("listaBookingStatus", bsService.listar());
+						model.addAttribute("listaFieldSchedules", fsService.listar());
+						
+						model.addAttribute("booking", new Booking());
+						model.addAttribute("user", new Users());
+						model.addAttribute("bookingstatus", new BookingStatus());
+						model.addAttribute("fieldschedule", new FieldSchedule());
+						
+						return "booking";
 					}
 				}
 			}
