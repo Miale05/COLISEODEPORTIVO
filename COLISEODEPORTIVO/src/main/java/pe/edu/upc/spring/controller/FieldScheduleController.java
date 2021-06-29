@@ -78,7 +78,14 @@ public class FieldScheduleController {
 			String end = objFieldSchedule.getSchedule().getScheduleEnd();
 			if (start == null || end == null) {
 				model.addAttribute("mensaje", "El intervalo es invalido");
-				return "redirect:/fieldschedule/irRegistrar";
+				model.addAttribute("listaSportFields", sfService.listar());
+				model.addAttribute("listaSchedules", schService.listar());
+				
+				model.addAttribute("fieldschedule", new FieldSchedule());
+				model.addAttribute("schedule", new Schedule());
+				model.addAttribute("sportfield", new SportField());
+				
+				return "fieldschedule";
 			}
 			
 			List<FieldSchedule> horarios = fschService.listar();
@@ -86,7 +93,14 @@ public class FieldScheduleController {
 				FieldSchedule c = horarios.get(i);
 				if (start.equals(c.getSchedule().getScheduleStart()) && end.equals(c.getSchedule().getScheduleEnd())) {
 					model.addAttribute("mensaje", "El horario ya existe");
-					return "redirect:/fieldschedule/irRegistrar";
+					model.addAttribute("listaSportFields", sfService.listar());
+					model.addAttribute("listaSchedules", schService.listar());
+					
+					model.addAttribute("fieldschedule", new FieldSchedule());
+					model.addAttribute("schedule", new Schedule());
+					model.addAttribute("sportfield", new SportField());
+					
+					return "fieldschedule";
 				}
 			}
 			boolean flag = fschService.insertar(objFieldSchedule);

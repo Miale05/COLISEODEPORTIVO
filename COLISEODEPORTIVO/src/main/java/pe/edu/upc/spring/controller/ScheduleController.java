@@ -53,8 +53,8 @@ public class ScheduleController {
 				Schedule c = horarios.get(i);
 				if (objSchedule.getScheduleStart().equals(c.getScheduleStart()) && objSchedule.getScheduleEnd().equals(c.getScheduleEnd())) {
 					model.addAttribute("mensaje", "El horario ya existe");
-					return "redirect:/schedule/irRegistrar";
-				}
+					model.addAttribute("schedule", new Schedule());
+					return "schedule";				}
 			}
 			
 			boolean flag = schService.insertar(objSchedule);
