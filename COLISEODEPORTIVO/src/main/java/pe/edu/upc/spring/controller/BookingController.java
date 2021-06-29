@@ -215,7 +215,29 @@ public class BookingController {
 	
 	@RequestMapping("/listar")
 	public String listar(Map<String, Object> model) {
-		model.put("listaBookings", bService.listar());
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		
+		Users user = userRepository.findByUsername(username);
+		boolean isAdmin = false;
+		if (user != null) {
+			for (int x = 0; x < user.getRoles().size(); x++) {
+				Role current = user.getRoles().get(x);
+				if (current.getAuthority().equals("ROLE_ADMIN")) {
+					isAdmin = true;
+				}
+			}
+		}
+		
+		List<Booking> lista = new ArrayList<Booking>();
+		List<Booking> listaActual = bService.listar();
+		for (int i = 0; i < listaActual.size(); i++) {
+			Booking c = listaActual.get(i);
+			if (isAdmin || user.getUserId() == c.getUser().getUserId()) {
+				lista.add(c);
+			}
+		}
+		model.put("listaBookings", lista);
 		return "listBooking";
 	}
 	
