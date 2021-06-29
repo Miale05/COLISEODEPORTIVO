@@ -18,8 +18,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.spring.model.Users;
+import pe.edu.upc.spring.repository.IUserRepository;
 import pe.edu.upc.spring.model.Role;
-
+import pe.edu.upc.spring.model.Sport;
 import pe.edu.upc.spring.service.IUserService;
 import pe.edu.upc.spring.service.IRoleService;
 import java.util.List;
@@ -33,6 +34,9 @@ public class UserController {
 	
 	@Autowired
 	private IRoleService rService;
+	
+	@Autowired
+	private IUserRepository userRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -64,6 +68,12 @@ public class UserController {
 			return "user";
 		}
 		else {
+			Users user = userRepository.findByUsername(objUser.getUsername());
+			if (user != null) {
+				model.addAttribute("mensaje", "El usuario ya existe");
+				model.addAttribute("user", new Users());
+				return "user";
+			}
 			Role userRole = new Role("ROLE_USER");
 			List<Role> roles = new ArrayList<Role>();
 			roles.add(userRole);
